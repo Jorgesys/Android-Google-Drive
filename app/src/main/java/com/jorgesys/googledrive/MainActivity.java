@@ -16,6 +16,7 @@ import android.graphics.Bitmap;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
@@ -59,9 +60,15 @@ public class MainActivity extends AppCompatActivity  implements ConnectionCallba
                 if(isAPÏConnected) {
                     startActivityForResult(new Intent(MediaStore.ACTION_IMAGE_CAPTURE), REQUEST_CODE_CAPTURE_IMAGE);
                 }else{
-                    Snackbar.make(findViewById(android.R.id.content), "Error Google API is disable or permissions are required!", Snackbar.LENGTH_LONG)
-                            .setActionTextColor(Color.RED)
-                            .show();
+                    Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), "Error Google API is disable or permissions are required!", Snackbar.LENGTH_LONG)
+                            .setActionTextColor(Color.RED);
+
+                    View snackbarView = snackbar.getView();
+                    snackbarView.setBackgroundColor(Color.DKGRAY);
+                    TextView textView = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
+                    textView.setTextColor(Color.RED);
+                    snackbar.show();
+
                 }
             }
         });
@@ -141,9 +148,15 @@ public class MainActivity extends AppCompatActivity  implements ConnectionCallba
                 if (resultCode == RESULT_OK) { //succesfully saved!.
                     Log.i(TAG, "Image successfully saved.");
                     mBitmapToSave = null;
-                    Snackbar.make(findViewById(android.R.id.content), "Photo succesfully saved to Google Drive!", Snackbar.LENGTH_LONG)
-                            .setActionTextColor(Color.RED)
-                            .show();
+                    Snackbar snackbar =  Snackbar.make(findViewById(android.R.id.content), "Photo succesfully saved to Google Drive!", Snackbar.LENGTH_LONG)
+                            .setActionTextColor(Color.RED);
+
+                    View snackbarView = snackbar.getView();
+                    snackbarView.setBackgroundColor(Color.DKGRAY);
+                    TextView textView = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
+                    textView.setTextColor(Color.YELLOW);
+                    snackbar.show();
+
                 }
                 break;
         }
